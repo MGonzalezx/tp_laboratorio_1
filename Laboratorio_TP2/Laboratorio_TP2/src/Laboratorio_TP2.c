@@ -1,0 +1,185 @@
+/*
+ ============================================================================
+ Name        : Laboratorio_TP2.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include <conio.h>
+#include "ArrayEmployees.h"
+#include "utn.h"
+#define CANTIDADEMPLEADOS 1000
+#define FALSE 0
+#define TRUE 1
+
+int main(void) {
+	setbuf(stdout, NULL);//disable buffer
+	char opcion2;
+	int option;
+	int i;
+	Employee listadoMainEmpleados[CANTIDADEMPLEADOS];
+	initEmployees(listadoMainEmpleados, CANTIDADEMPLEADOS);
+	int datosCargados = 0;
+
+	printf("                            ---------------------\n"
+		   "                              ***BIENVENIDO***\n"
+		   "                            ---------------------\n");
+	do
+	{
+		printf("1. ALTAS");
+		printf("\n2. MODIFICAR");
+		printf("\n3. BAJAS.");
+		printf("\n4. INFORMAR");
+		printf("\n5. Salir");
+		printf("\nIngrese una opcion: \n");
+		scanf("%d", &option);
+
+
+
+		switch(option)
+		{
+		case 1:
+			if(datosCargados >= 0)
+			{
+				i = cargar_Employee(listadoMainEmpleados, CANTIDADEMPLEADOS);
+				switch(i)
+				{
+				case 1:
+					printf("¡¡¡Datos cargados con exito!!!\n");
+					printf("|-----------------------------------------|\n");
+					break;
+				case 0:
+					printf("¡¡ERROR indice invalido u ocupado!!!\n");
+					printf("|-----------------------------------------|\n");
+					break;
+				}
+
+
+				datosCargados = 1;
+			}
+			break;
+		case 2:
+			if(datosCargados == 1)
+			{
+				i= modificar_Employee(listadoMainEmpleados, CANTIDADEMPLEADOS);
+				switch(i)
+				{
+				case 1:
+					printf("¡¡¡Empleado modificado con exito!!!\n");
+					printf("|-----------------------------------------|\n");
+					break;
+				case 0:
+					printf("¡¡¡No se modifico nada ya que ah cancelado la modificacion o el ID ingresado no existe!!!\n");
+					printf("|-----------------------------------------|\n");
+					break;
+				}
+			}
+			else
+			{
+				printf("|-----------------------------------------|\n"
+					   "   Por favor, cargue un dato primero!!\n"
+					   "|-----------------------------------------|\n\n");
+			}
+			break;
+		case 3:
+			if(datosCargados == 1)
+			{
+				i = removeEmployee(listadoMainEmpleados, CANTIDADEMPLEADOS);
+				switch(i)
+				{
+				case -1:
+					printf("¡¡¡No se pudo encontrar el empleado!!!\n");
+					printf("|-----------------------------------------|\n");
+					break;
+				case 0:
+					printf("\n¡¡¡Registro eliminado!!\n");
+					printf("|-----------------------------------------|\n");
+					break;
+				}
+			}
+			else
+			{
+				printf("|-----------------------------------------|\n"
+					   "   Por favor, cargue un dato primero!!\n"
+					   "|-----------------------------------------|\n\n");
+			}
+			break;
+		case 4:
+			if(datosCargados == 1)
+			{
+
+				do
+				{
+					printf("\na. Listado de los empleados ordenados alfabeticamente por Apellido.");
+					printf("\nb. Listado de los empleados ordenados Sector.");
+					printf("\nc. Total y promedio de los salarios, y"
+						   "cuantos empleados superan el salario promedio.");
+					printf("\nd. Nada, salir.");
+					printf("\nIngrese una opcion: \n");
+
+					fflush(stdin);
+					scanf("%c", &opcion2);
+
+					switch(opcion2)
+					{
+					case 'a':
+						sortEmployeesByLastName(listadoMainEmpleados, CANTIDADEMPLEADOS, 0);
+						printf("|-----------------------------------------|\n");
+						break;
+					case 'b':
+						sortEmployeesBySector(listadoMainEmpleados, CANTIDADEMPLEADOS, 0);
+						printf("|-----------------------------------------|\n");
+						break;
+					case 'c':
+							printf("La suma total de todos los salarios es: \n");
+							printf("%.2f\n",sumar_Salarios(listadoMainEmpleados, CANTIDADEMPLEADOS));
+							printf("El promedio de los salarios es: \n");
+							printf("%.2f\n", promedio_Salarios(listadoMainEmpleados, CANTIDADEMPLEADOS));
+							printf("La cantidad de empleados que superan el sueldo promedio es: \n");
+							printf("%d\n", cantidad_Salarios_Superando_Promedio(listadoMainEmpleados, CANTIDADEMPLEADOS));
+
+
+						break;
+					case 'd':
+
+						break;
+
+					default:
+						printf("Opcion incorrecta!!");
+						break;
+					}
+
+
+				}
+				while(opcion2 !='d');
+			}
+			else
+			{
+				printf("|-----------------------------------------|\n"
+					   "   Por favor, cargue un dato primero!!\n"
+					   "|-----------------------------------------|\n\n");
+			}
+
+			break;
+		case 5:
+			printf("                         ---------------------------\n"
+				   "                           ***TENGA UN BUEN DIA***\n"
+				   "                         ---------------------------\n");
+			break;
+
+		default:
+			printf("Opcion incorrecta, por favor elejir teclas del 1 al 5\n\n");
+
+		}
+
+	}
+	while(option != 5);
+	return EXIT_SUCCESS;
+}

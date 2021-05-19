@@ -1,0 +1,5 @@
+13:12:57 **** Incremental Build of configuration Debug for project Laboratorio_TP2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o Laboratorio_TP2.exe "src\\ArrayEmployees.o" "src\\Laboratorio_TP2.o" "src\\utn.o" 
+Info: Nothing to build for Laboratorio_TP2

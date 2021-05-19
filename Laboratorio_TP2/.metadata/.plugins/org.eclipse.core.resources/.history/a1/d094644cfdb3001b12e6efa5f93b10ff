@@ -1,0 +1,26 @@
+/*
+ ============================================================================
+ Name        : Laboratorio_TP2.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include <conio.h>
+#include "ArrayEmployees.h"
+#include "utn.h"
+#define CANTIDADEMPLEADOS 1000
+#define FALSE 0
+#define TRUE 1
+
+int main(void) {
+	setbuf(stdout, NULL);//disable buffer
+
+	return EXIT_SUCCESS;
+}
