@@ -271,14 +271,14 @@ int ll_remove(LinkedList* this,int index)
 int ll_clear(LinkedList* this)
 {
 	int returnAux = -1;
-	int longitud;
+	//int longitud;
 	int i;
 	int remove;
 	if(this != NULL)
 	{
 		//Primero consigo la longitud de la lista.
-		longitud = ll_len(this);
-		for(i = 0; i<longitud; i++)
+		//longitud = ll_len(this);
+		for(i = 0; i<ll_len(this); i++)
 		{
 			//Por cada i con un limite que es la longitud de la lista, va a borrar los elementos
 			remove = ll_remove(this, i);
@@ -335,15 +335,16 @@ int ll_indexOf(LinkedList* this, void* pElement)
 {
 	//Nos pide que busquemos el indice del elemento que nos va a pasar
 	int returnAux = -1;
-	Node* pNode = NULL;
+	//Node* pNode = NULL;
 	int i;
 	if(this != NULL)
 	{
 		//Pasamos por toda la lista hasta que encontremos un elemento igual al que pide.
 		for(i=0; i<ll_len(this); i++)
 		{
-			pNode = getNode(this,i);
-			if(pNode->pElement == pElement)
+			//pNode = getNode(this,i);
+			//pNode->pElement = ll_get(this, i);
+			if(ll_get(this, i) == pElement)
 			{
 				//Nos pide que devolvamos el indice del elemento.
 				returnAux = i;
@@ -368,14 +369,12 @@ int ll_isEmpty(LinkedList* this)
 
 	    if(this != NULL)
 	    {
+	    	returnAux = 0;
 	        if(ll_len(this) == 0)
 	        {
 	            returnAux = 1;
 	        }
-	        else
-	        {
-	            returnAux = 0;
-	        }
+
 	    }
 
 	    return returnAux;
@@ -415,16 +414,16 @@ de la lista.
 void* ll_pop(LinkedList* this,int index)
 {
 	void* returnAux = NULL;
-	Node* pNode = NULL;
+	//Node* pNode = NULL;
 	if(this != NULL && index >= 0 && index <= ll_len(this))
 	{
 		//Primero tenemos que conseguir el elemento a eliminar
-		pNode = getNode(this, index);
+		//pNode = getNode(this, index);
 		//Acordate que getNode devuelce NULL si esta mal y !=NULL si esta bien
-		if(pNode != NULL)
+		if(ll_get(this, index) != NULL)
 		{
 			//Ahora el elemento que vamos a devolver devuelve el puntero
-			returnAux = pNode->pElement;
+			returnAux = ll_get(this, index);
 			ll_remove(this, index);
 		}
 	}
@@ -449,14 +448,13 @@ int ll_contains(LinkedList* this, void* pElement)
 	{
 		index = ll_indexOf(this, pElement);
 		//El indice tiene que que ser mayor o igual a 0
+		returnAux = 0;
 		if( index > -1)
 		{
 			returnAux = 1;
 		}
-		else
-		{
-			returnAux = 0;
-		}
+
+
 	}
 
 	return returnAux;
@@ -473,19 +471,19 @@ int ll_contains(LinkedList* this, void* pElement)
 */
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
-	 int returnAux = -1;
+	int returnAux = -1;
 	int index;
-	Node* pNode = NULL;
+	//Node* pNode = NULL;
 	if(this != NULL && this2 != NULL)
 	{
 		returnAux = 1;
 		for(index = 0; index < ll_len(this2); index++)
 		{
 			//Conseguimos todos los elementos de la lista 2 para luego comparar los elementos pNode con la lista 1
-			pNode = getNode(this2, index);
+			//pNode = getNode(this2, index);
 			//Mientras va agarrando los elementos de la lista 2, los compara.
 			//Si la lista 1 contiene este elemento, con este elementos nos referimos a la que conseguimos de la lista 2
-			if(ll_contains(this, pNode->pElement) == 0)
+			if(ll_contains(this, ll_get(this2, index)) == 0)
 			{
 				returnAux = 0;
 				break;
@@ -509,7 +507,7 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
 	LinkedList* cloneArray = NULL;
-	Node* pNode = NULL;
+	//Node* pNode = NULL;
 	int i;
 	if(this != NULL && from >= 0 && to > from && to <= ll_len(this))
 	{
@@ -519,9 +517,9 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 		for(i=from; i<to; i++)
 		{
 			//Conseguimos los elementos que queremos poner
-			pNode = getNode(this, i);
+			//pNode = getNode(this, i);
 			//Ponemos los elementos
-			ll_add(cloneArray, pNode->pElement);
+			ll_add(cloneArray, ll_get(this, i));
 		}
 	}
 
