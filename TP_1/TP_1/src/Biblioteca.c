@@ -66,6 +66,7 @@ int pedirEntero(int* pEntero, char mensaje[], char mensajeError[], int minimo, i
     return 1;
 }
 
+
 /** \brief Comprueba si el string recibido forma un numero entero.
  *
  * \param cadenaNumerica[] char Array a evaluar.

@@ -16,12 +16,13 @@
  */
 void menuPrincipal_print(void)
 {
-    printf("1) Inicializar\n");
-    printf("2) Cargar\n");
-    printf("3) Mostrar\n");
-    printf("4) Calcular Promedio\n");
-    printf("5) Ordenar\n");
-    printf("6) Salir\n");
+
+
+	printf("3)Calcular todas las operaciones (suma, resta, multiplicacion, "
+		   "division, factorial de los dos numeros ingresados). \n\n"
+		   "4)Informar resultados. \n\n"
+		   "5)Salir de la calculadora. \n\n");
+
 
 }
 
@@ -38,7 +39,7 @@ int menuPrincipal(void)
     int opcion;
     printf("\n");
     menuPrincipal_print();
-    pedirEntero(&opcion, "\nIntroduzca una opcion: ", "\nError, opcion invalida. Introduzca una opcion valida: ", 1, 6);
+    pedirEntero(&opcion, "\nIntroduzca una opcion: ", "\nError, opcion invalida. Introduzca una opcion valida: ", 1, 5);
     fflush(stdin);
     return opcion;
 }
